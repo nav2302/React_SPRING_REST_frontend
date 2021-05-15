@@ -6,6 +6,7 @@ class HelloWorldService{
     }
 
     executeHelloWorldPathVaribaleService(name){
+        
         return axios.get(`http://localhost:8080/hello-world/path-variable/${name}`)
     }
 }

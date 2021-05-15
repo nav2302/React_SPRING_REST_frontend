@@ -16,26 +16,43 @@ class LoginComponent extends Component {
     }
 
     handleChange(event) {
+        // console.log(event)
         this.setState({
             [event.target.name]: event.target.value
         })
     }
 
     LoginClicked(event) {
-        if (this.state.username === "nav" && this.state.password === "nav") {
-            AuthenticationService.resgisterSuccessfulLogin(this.state.username, this.state.password)
-            this.props.history.push(`/welcome/${this.state.username}`)
-            // this.setState({
-            //     showSuccessMessage: true,
-            //     hasLoginFailed: false
-            // })
-        }
-        else {
-            this.setState({
-                showSuccessMessage: false,
-                hasLoginFailed: true
+        // if (this.state.username === "nav" && this.state.password === "nav") {
+        //     AuthenticationService.resgisterSuccessfulLogin(this.state.username, this.state.password)
+        //     this.props.history.push(`/welcome/${this.state.username}`)
+        //     // this.setState({
+        //     //     showSuccessMessage: true,
+        //     //     hasLoginFailed: false
+        //     // })
+        // }
+        // else {
+        //     this.setState({
+        //         showSuccessMessage: false,
+        //         hasLoginFailed: true
+        //     })
+        // }
+
+        AuthenticationService.executeBasicAuthService(this.state.username, this.state.password)
+            .then(
+                () => {
+                    AuthenticationService.resgisterSuccessfulLogin(this.state.username, this.state.password)
+                    this.props.history.push(`/welcome/${this.state.username}`)
+                }
+            )
+            .catch( () => {
+                this.setState({
+                    showSuccessMessage: false,
+                    hasLoginFailed: true
+                })
             })
-        }
+
+
     }
 
     render() {

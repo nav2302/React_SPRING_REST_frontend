@@ -47,6 +47,18 @@ class WelcomeComponent extends Component {
             // console.log(response.config)
         })
         .catch(error => {
+            let errorMessage = ''
+            if(error.message){
+                errorMessage += error.message
+            }
+
+            if(error.response && error.response.data){
+                errorMessage += error.response.data.message
+            }
+            this.setState({
+                welcomeMessage : errorMessage
+            })
+
             console.log(error.response.data.message)
         })
     }
