@@ -38,10 +38,25 @@ class LoginComponent extends Component {
         //     })
         // }
 
-        AuthenticationService.executeBasicAuthService(this.state.username, this.state.password)
+        // AuthenticationService.executeBasicAuthService(this.state.username, this.state.password)
+        //     .then(
+        //         () => {
+        //             AuthenticationService.resgisterSuccessfulLogin(this.state.username, this.state.password)
+        //             this.props.history.push(`/welcome/${this.state.username}`)
+        //         }
+        //     )
+        //     .catch( () => {
+        //         this.setState({
+        //             showSuccessMessage: false,
+        //             hasLoginFailed: true
+        //         })
+        //     })
+
+            AuthenticationService.executeJWTAuthService(this.state.username, this.state.password)
             .then(
-                () => {
-                    AuthenticationService.resgisterSuccessfulLogin(this.state.username, this.state.password)
+                (response) => {
+                    // console.log(response)
+                    AuthenticationService.resgisterSuccessfulLoginForJWT(this.state.username,response.data.token)
                     this.props.history.push(`/welcome/${this.state.username}`)
                 }
             )
@@ -51,7 +66,6 @@ class LoginComponent extends Component {
                     hasLoginFailed: true
                 })
             })
-
 
     }
 

@@ -1,22 +1,23 @@
 import axios from 'axios'
+import API_URL from '../../Constants'
 
 class TodoDataService {
     retrieveAllTodos(userName){
-        return axios.get(`http://localhost:8080/users/${userName}/todos`)
+        return axios.get(`${API_URL}/users/${userName}/todos`)
     }
     retrieveTodo(userName, id){
-        return axios.get(`http://localhost:8080/users/${userName}/todos/${id}`)
+        return axios.get(`${API_URL}/users/${userName}/todos/${id}`)
     }
     deleteTodo(userName, id){
-        return axios.delete(`http://localhost:8080/users/${userName}/todos/${id}`)
+        return axios.delete(`${API_URL}/users/${userName}/todos/${id}`)
     }
 
     updateTodo(userName, id, todo){
-        return axios.put(`http://localhost:8080/users/${userName}/todos/${id}`, todo)
+        return axios.put(`${API_URL}/users/${userName}/todos/${id}`, todo)
     }
 
     createTodo(userName, todo){
-        return axios.post(`http://localhost:8080/users/${userName}/todos/`, todo)
+        return axios.post(`${API_URL}/users/${userName}/todos/`, todo)
     }
 
 } 
