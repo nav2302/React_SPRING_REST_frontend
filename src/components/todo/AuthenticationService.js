@@ -1,5 +1,5 @@
 import axios from 'axios'
-import API_URL from '../../Constants'
+import Constants from '../../Constants'
 
 export const USER_NAME_SESSION = 'authenticatedUser'
 
@@ -7,7 +7,7 @@ class AuthenticationService {
 
     executeBasicAuthService(username, password){
         let basicAuthHeader = 'Basic ' + window.btoa(username + ':' + password)
-        return axios.get(`${API_URL}/basicauth`, {
+        return axios.get(`${Constants.API_URL}/basicauth`, {
             headers: {
                 authorization: basicAuthHeader
             }
@@ -15,8 +15,8 @@ class AuthenticationService {
     }
 
     executeJWTAuthService(username, password){
-        console.log(`${API_URL}`)
-        return axios.post(`${API_URL}/authenticate`, {
+        console.log(`${Constants.API_URL}`)
+        return axios.post(`${Constants.API_URL}/authenticate`, {
             username,
             password
         })
@@ -29,6 +29,7 @@ class AuthenticationService {
     }
 
     resgisterSuccessfulLoginForJWT(username, token){
+        // console.log(USER_NAME_SESSION)
         sessionStorage.setItem(USER_NAME_SESSION, username);
         this.setupAxiosInterceptors(this.createJWTtoken(token))
     }
@@ -42,6 +43,7 @@ class AuthenticationService {
     }
 
     isUserLoggedIn() {
+        console.log(USER_NAME_SESSION)
         let user = sessionStorage.getItem(USER_NAME_SESSION)
         if (user == null) return false
         return true

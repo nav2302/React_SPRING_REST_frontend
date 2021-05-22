@@ -1,23 +1,23 @@
 import axios from 'axios'
-import API_URL from '../../Constants'
+import Constants from '../../Constants'
 
 class TodoDataService {
     retrieveAllTodos(userName){
-        return axios.get(`${API_URL}/users/${userName}/todos`)
+        return axios.get(`${Constants.JPA_API_URL}/users/${userName}/todos`)
     }
     retrieveTodo(userName, id){
-        return axios.get(`${API_URL}/users/${userName}/todos/${id}`)
+        return axios.get(`${Constants.JPA_API_URL}/users/${userName}/todos/${id}`)
     }
     deleteTodo(userName, id){
-        return axios.delete(`${API_URL}/users/${userName}/todos/${id}`)
+        return axios.delete(`${Constants.JPA_API_URL}/users/${userName}/todos/${id}`)
     }
 
     updateTodo(userName, id, todo){
-        return axios.put(`${API_URL}/users/${userName}/todos/${id}`, todo)
+        return axios.put(`${Constants.JPA_API_URL}/users/${userName}/todos/${id}`, todo)
     }
 
     createTodo(userName, todo){
-        return axios.post(`${API_URL}/users/${userName}/todos/`, todo)
+        return axios.post(`${Constants.JPA_API_URL}/users/${userName}/todos/`, todo)
     }
 
 } 
